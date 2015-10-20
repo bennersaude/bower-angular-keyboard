@@ -217,11 +217,12 @@ angular.module('keyboard').directive('kbItem', ["KbItemController", "$animate", 
       $scope.$watch(attrs.kbItem, function(model) {
         kbItem.model = model;
       });
-      if (typeof kbContainer.active === 'undefined') {
-        kbContainer.active = kbItem;
-      } else if (kbContainer.isSelected(kbItem.model) && kbContainer.isSelected(kbContainer.active.model) === false) {
+	  
+      kbContainer.active = kbContainer._first();
+	  if (kbContainer.isSelected(kbItem.model) && kbContainer.isSelected(kbContainer.active.model) === false) {
         kbContainer.active = kbItem;
       }
+	  
       $scope.$watch(function() {
         return kbContainer.isSelected(kbItem.model);
       }, function(isSelected) {
